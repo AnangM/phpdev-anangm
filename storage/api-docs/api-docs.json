@@ -1,0 +1,198 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Applicant Management System API",
+        "description": "API Docs for php dev candidates AnangM",
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api",
+            "description": "Demo API Server"
+        }
+    ],
+    "paths": {
+        "/candidates": {
+            "get": {
+                "tags": [
+                    "Candidates"
+                ],
+                "summary": "List all available candidates. Paginated per 20 items",
+                "operationId": "listCandidates",
+                "responses": {
+                    "200": {
+                        "description": "Successfull response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated, please make sure bearer token are provided",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Candidates"
+                ],
+                "summary": "Create new candidate",
+                "operationId": "createCandidates",
+                "responses": {
+                    "201": {
+                        "description": "Successfull response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Client error, please check response to see more detail and make sure your payload is in accordance with validation rules",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated, please make sure bearer token are provided",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "The user does not have privilege to perform this action",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/candidates/{id}": {
+            "get": {
+                "tags": [
+                    "Candidates"
+                ],
+                "summary": "View single candidate data",
+                "operationId": "readCandidates",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Candidate Id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfull response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated, please make sure bearer token are provided",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Candidates"
+                ],
+                "summary": "Update existing candidate data",
+                "operationId": "updateCandidates",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Candidate Id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfull response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Client error, please check response to see more detail and make sure your payload is in accordance with validation rules",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated, please make sure bearer token are provided",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "The user does not have privilege to perform this action",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The candidate you want to edit does not exists",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        }
+    }
+}
