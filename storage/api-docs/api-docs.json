@@ -238,6 +238,77 @@
                         "passport": []
                     }
                 ]
+            },
+            "delete": {
+                "tags": [
+                    "Candidates"
+                ],
+                "summary": "Delete existing candidate data",
+                "operationId": "deleteCandidates",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Candidate Id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfull response, notice the deleted_at property is not null now",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CandidateSchema"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Client error, please check response to see more detail and make sure your payload is in accordance with validation rules",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorSchema"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated, please make sure bearer token are provided",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorSchema"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "The user does not have privilege to perform this action",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorSchema"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The candidate you want to edit does not exists",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorSchema"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
             }
         }
     },
@@ -312,9 +383,9 @@
                     },
                     "resume_url": {
                         "title": "Resume URL",
-                        "description": "Candidate resume url",
+                        "description": "Candidate resume url. Can be accessed by {base_url}/{resume_url}",
                         "type": "string",
-                        "example": "http://localhost/storage/resume.pdf"
+                        "example": "path/to/resume.pdf"
                     },
                     "email": {
                         "title": "E-Mail",
@@ -327,6 +398,24 @@
                         "description": "Candidate phone number",
                         "type": "string",
                         "example": "08123123123"
+                    },
+                    "created_at": {
+                        "title": "Created At",
+                        "description": "timestamp when candidate is added",
+                        "type": "string",
+                        "example": "2022-09-30T13:37:09.000000Z"
+                    },
+                    "updated_at": {
+                        "title": "Updated At",
+                        "description": "timestamp when candidate is updated",
+                        "type": "string",
+                        "example": "2022-09-30T13:37:09.000000Z"
+                    },
+                    "deleted_at": {
+                        "title": "Updated At",
+                        "description": "timestamp when candidate is deleted. if null then candidate is NOT YET deleted",
+                        "type": "string",
+                        "example": "2022-09-30T13:37:09.000000Z"
                     }
                 },
                 "type": "object"

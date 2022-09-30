@@ -134,4 +134,37 @@ class CandidateSchema{
      * @var string
      */
     private $phone;
+
+    /**
+     * @OA\Property(
+     *      title="Created At",
+     *      description="timestamp when candidate is added",
+     *      example="2022-09-30T13:37:09.000000Z"
+     * )
+     *
+     * @var string
+     */
+    private $created_at;
+
+     /**
+     * @OA\Property(
+     *      title="Updated At",
+     *      description="timestamp when candidate is updated",
+     *      example="2022-09-30T13:37:09.000000Z"
+     * )
+     *
+     * @var string
+     */
+    private $updated_at;
+
+    /**
+     * @OA\Property(
+     *      title="Updated At",
+     *      description="timestamp when candidate is deleted. if null then candidate is NOT YET deleted",
+     *      example="2022-09-30T13:37:09.000000Z"
+     * )
+     *
+     * @var string
+     */
+    private $deleted_at;
 }

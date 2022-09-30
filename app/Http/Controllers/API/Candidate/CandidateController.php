@@ -17,6 +17,7 @@ class CandidateController extends Controller
         $this->middleware('permission:candidate-create', ['only' => 'create']);
         $this->middleware('permission:candidate-update', ['only' => 'update']);
         $this->middleware('permission:candidate-read', ['only' => 'read']);
+        $this->middleware('permission:candidate-delete', ['only' => 'delete']);
     }
 
     /**
@@ -228,6 +229,48 @@ class CandidateController extends Controller
 
         return response()->json($candidate, 200);
     }
+
+    /**
+     * @OA\Delete(
+     * path="/candidates/{id}",
+     * operationId="deleteCandidates",
+     * tags={"Candidates"},
+     * summary="Delete existing candidate data",
+     * @OA\Parameter(
+     * name="id",
+     * description="Candidate Id",
+     * in="path"
+     * ),
+     * security={
+     * {"passport"={}}
+     * },
+     * @OA\Response(
+     * response=200,
+     * @OA\JsonContent(ref="#/components/schemas/CandidateSchema"),
+     * description="Successfull response, notice the deleted_at property is not null now"
+     * ),
+     * @OA\Response(
+     * response=400,
+     * @OA\JsonContent(ref="#/components/schemas/ErrorSchema"),
+     * description="Client error, please check response to see more detail and make sure your payload is in accordance with validation rules"
+     * ),
+     * @OA\Response(
+     * response=401,
+     * @OA\JsonContent(ref="#/components/schemas/ErrorSchema"),
+     * description="Unauthenticated, please make sure bearer token are provided"
+     * ),
+     * @OA\Response(
+     * response=403,
+     * @OA\JsonContent(ref="#/components/schemas/ErrorSchema"),
+     * description="The user does not have privilege to perform this action"
+     * ),
+     * * @OA\Response(
+     * response=404,
+     * @OA\JsonContent(ref="#/components/schemas/ErrorSchema"),
+     * description="The candidate you want to edit does not exists"
+     * )
+     * )
+     */
     public function delete($id)
     {
         $candidate = Candidate::where('id', $id)->first();

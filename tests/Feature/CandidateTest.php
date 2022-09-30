@@ -352,4 +352,45 @@ class CandidateTest extends TestCase
 
         $response->assertStatus(400);
     }
+
+    public function test_hr_delete_candidate()
+    {
+        $user = User::where('email', 'lee.doe@mail.com')->first();
+
+        Passport::actingAs($user);
+        $token = $user->createToken('Laravel Password Grant Client')->accessToken;
+
+        $candidate =  Candidate::first();
+
+        $headers = [
+            "Authorization" => "Bearer $token"
+        ];
+
+        $response = $this->delete("/api/candidates/$candidate->id");
+
+        $response->assertStatus(403);
+    }
+
+    public function test_delete_candidate()
+    {
+        $user = User::where('email', 'john.doe@mail.com')->first();
+
+        Passport::actingAs($user);
+        $token = $user->createToken('Laravel Password Grant Client')->accessToken;
+
+        $candidate =  Candidate::first();
+        $id = $candidate->id;
+
+        $headers = [
+            "Authorization" => "Bearer $token"
+        ];
+
+        $response = $this->delete("/api/candidates/$candidate->id");
+
+        $response->assertStatus(200);
+
+        $candidate =  Candidate::where('id',$id)->first();
+
+        $this->assertNull($candidate);
+    }
 }

@@ -27,5 +27,6 @@ Route::group(['middleware'=>['auth:api']], function(){
         Route::post('', [CandidateController::class, 'create']);
         Route::get('/{id}', [CandidateController::class, 'read']);
         Route::put('/{id}', [CandidateController::class, 'update']);
+        Route::delete('/{id}', [CandidateController::class, 'delete']);
     });        
 });

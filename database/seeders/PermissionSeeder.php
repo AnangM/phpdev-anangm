@@ -20,6 +20,7 @@ class PermissionSeeder extends Seeder
             'candidate-update',
             'candidate-read',
             'candidate-list',
+            'candidate-delete',
         ];
 
         foreach($permissions as $permission){
