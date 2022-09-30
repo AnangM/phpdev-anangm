@@ -4,35 +4,30 @@ namespace Tests\Feature;
 
 use App\Models\Candidate;
 use App\Models\User;
+use Database\Seeders\CandidateSeeder;
 use Faker\Factory;
 use Laravel\Passport\Passport;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\RoleSeeder;
 use Database\Seeders\UserSeeder;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
 class CandidateTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function test_example()
-    {
-        $response = $this->get('/');
 
-        $response->assertStatus(200);
+    use RefreshDatabase;
+
+    public function setUp():void{
+        parent::setUp();
+        $this->seed();
+        $this->seed(CandidateSeeder::class);
     }
 
     public function test_create_candidate()
     {
-
-        $this->seed([
-            PermissionSeeder::class,
-            RoleSeeder::class,
-            UserSeeder::class
-        ]);
 
         $user = User::where('email', 'john.doe@mail.com')->first();
 
@@ -60,8 +55,8 @@ class CandidateTest extends TestCase
                 "java"
             ],
             "email" => $faker->email(),
-            "phone" => $faker->phoneNumber(),
-            "resume_url" => $faker->filePath()
+            "phone" => "012312312321",
+            "resume" => "data:application/pdf;base64,JVBERi0xLjMKJcTl8uXrp/Og0MTGCjMgMCBvYmoKPDwgL0ZpbHRlciAvRmxhdGVEZWNvZGUgL0xlbmd0aCAxMTkgPj4Kc3RyZWFtCngBK1QIVChU0HcuNlRILlYwAMPiZKCQgZ6RCYQPYhhaKJhaGOtZGikk5yo4hQBlDQwMjBVCkhVMIXqAlJGRqYKpoSVXSK6CfkiIkYKhQkiagoaikrKipkJIloJrCNgq/OYiTDM2MtQzNLQwwmKkCsK8QABJcSgnCmVuZHN0cmVhbQplbmRvYmoKMSAwIG9iago8PCAvVHlwZSAvUGFnZSAvUGFyZW50IDIgMCBSIC9SZXNvdXJjZXMgNCAwIFIgL0NvbnRlbnRzIDMgMCBSIC9NZWRpYUJveCBbMCAwIDYxMiA3OTJdCj4+CmVuZG9iago0IDAgb2JqCjw8IC9Qcm9jU2V0IFsgL1BERiAvVGV4dCBdIC9Db2xvclNwYWNlIDw8IC9DczEgNSAwIFIgPj4gL0ZvbnQgPDwgL1RUMiA3IDAgUgo+PiA"
         ];
 
         $response = $this->post('/api/candidates', $body, $headers);
@@ -99,8 +94,8 @@ class CandidateTest extends TestCase
                 "java"
             ],
             "email" => $faker->email(),
-            "phone" => $faker->phoneNumber(),
-            "resume_url" => $faker->filePath()
+            "phone" => "08123123123",
+            "resume" => "data:application/pdf;base64,JVBERi0xLjMKJcTl8uXrp/Og0MTGCjMgMCBvYmoKPDwgL0ZpbHRlciAvRmxhdGVEZWNvZGUgL0xlbmd0aCAxMTkgPj4Kc3RyZWFtCngBK1QIVChU0HcuNlRILlYwAMPiZKCQgZ6RCYQPYhhaKJhaGOtZGikk5yo4hQBlDQwMjBVCkhVMIXqAlJGRqYKpoSVXSK6CfkiIkYKhQkiagoaikrKipkJIloJrCNgq/OYiTDM2MtQzNLQwwmKkCsK8QABJcSgnCmVuZHN0cmVhbQplbmRvYmoKMSAwIG9iago8PCAvVHlwZSAvUGFnZSAvUGFyZW50IDIgMCBSIC9SZXNvdXJjZXMgNCAwIFIgL0NvbnRlbnRzIDMgMCBSIC9NZWRpYUJveCBbMCAwIDYxMiA3OTJdCj4+CmVuZG9iago0IDAgb2JqCjw8IC9Qcm9jU2V0IFsgL1BERiAvVGV4dCBdIC9Db2xvclNwYWNlIDw8IC9DczEgNSAwIFIgPj4gL0ZvbnQgPDwgL1RUMiA3IDAgUgo+PiA"
         ];
 
         $response = $this->post('/api/candidates', $body, $headers);
@@ -137,7 +132,7 @@ class CandidateTest extends TestCase
                 "java"
             ],
             "email" => $faker->email(),
-            "phone" => $faker->phoneNumber(),
+            "phone" => "081231231231",
             "resume_url" => $faker->filePath()
         ];
 
@@ -232,7 +227,7 @@ class CandidateTest extends TestCase
                 "java"
             ],
             "email" => $faker->email(),
-            "phone" => $faker->phoneNumber(),
+            "phone" => "089123123123",
             "resume_url" => $faker->filePath()
         ];
 
@@ -271,8 +266,7 @@ class CandidateTest extends TestCase
                 "java"
             ],
             "email" => $faker->email(),
-            "phone" => $faker->phoneNumber(),
-            "resume_url" => $faker->filePath()
+            "phone" => "081231231231"
         ];
 
         $response = $this->put("/api/candidates/$candidate->id", $body, $headers);
@@ -312,7 +306,7 @@ class CandidateTest extends TestCase
                 "java"
             ],
             "email" => $faker->email(),
-            "phone" => $faker->phoneNumber(),
+            "phone" => "081231231231",
             "resume_url" => $faker->filePath()
         ];
 
@@ -350,7 +344,7 @@ class CandidateTest extends TestCase
                 "java"
             ],
             "email" => $faker->email(),
-            "phone" => $faker->phoneNumber(),
+            "phone" => "081231231231",
             "resume_url" => $faker->filePath()
         ];
 

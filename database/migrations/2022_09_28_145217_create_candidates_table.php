@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('experience', 100);
             $table->string('last_position', 255);
             $table->string('applied_position', 255);
-            $table->json('top_skills');
+            $table->jsonb('top_skills');
             $table->string('email', 255);
             $table->string('phone', 15);
             $table->text('resume_url');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Candidate;
 
 use App\Http\Controllers\Controller;
 use App\Models\Candidate;
+use App\Utilities\FileStorage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -93,15 +94,16 @@ class CandidateController extends Controller
             'top_skills' => 'required|array',
             'email' => 'required|email|max:255',
             'phone' => 'required|max:15|min:10',
-            'resume_url' => 'required'
+            'resume' => 'required|base64mimes:pdf|base64max:8192'
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
 
-        $data = $request->only(['name', 'education', 'birthday', 'experience', 'last_position', 'applied_position', 'email', 'phone', 'resume_url']);
+        $data = $request->only(['name', 'education', 'birthday', 'experience', 'last_position', 'applied_position', 'email', 'phone']);
         $data["top_skills"] = json_encode($request->input('top_skills'));
+        $data[ 'resume_url'] = FileStorage::store($request->input('resume'), "resumes", "pdf");
 
         $candidate = Candidate::create($data);
 
@@ -201,7 +203,7 @@ class CandidateController extends Controller
             'top_skills' => 'required|array',
             'email' => 'required|email|max:255',
             'phone' => 'required|max:15|min:10',
-            'resume_url' => 'required'
+            'resume' => 'base64mimes:pdf|base64max:8192'
         ]);
 
         if ($validator->fails()) {
@@ -213,8 +215,16 @@ class CandidateController extends Controller
             return response()->json(["message" => "Candidate with given id $id not found"], 404);
         }
 
-        Candidate::where('id', $id)->update($request->only(['name', 'education', 'birthday', 'experience', 'last_position', 'applied_position', 'top_skills', 'email', 'phone', 'resume_url']));
+        $data = $request->only(['name', 'education', 'birthday', 'experience', 'last_position', 'applied_position', 'email', 'phone']);
+        $data["top_skills"] = json_encode($request->input('top_skills'));
+        if($request->input('resume') != null){
+            FileStorage::delete($candidate->resume_url);
+            $data[ 'resume_url'] = FileStorage::store($request->input('resume'), "resumes", "pdf");
+        }
+
+        Candidate::where('id', $id)->update($data);
         $candidate = Candidate::where('id', $id)->first();
+        $candidate->top_skills = json_decode($candidate->top_skills);
 
         return response()->json($candidate, 200);
     }
