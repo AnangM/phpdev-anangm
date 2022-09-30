@@ -23,6 +23,24 @@
 
 10. Or test application `php artisan test`
 
+### Documentation
+
+- Run application `php artisan serve`
+- Go To `{baseurl}/api/documentation`
+- Click `Authorize` button to authorize swagger, usernames and passwords detail are listed in the `Useful Credential` section of this document
+- Make sure the token url are correct, it shouldbe `{baseurl}/oauth/token`
+- (Optional) If token url are wrong, adjust it accordingly in file `app/config/l5-swagger.php` on options `default.securityDefinitions.passport.flows.password` or around line 196-198
+- Fill required information 
+```
+username: fill with email from credential below
+password: fill with corresponding password from credential below
+client credential location: choose Authorization Header
+client id: fill with client id generated from step 8 on How to run this app
+client secret : fill with client secret generated from step 8 on How to run this app
+```
+-  Click `Authorize`
+- You can play with any api in the docs by clicking the api and click `Try it out`
+
 
 ---
 ### App dependencies
@@ -39,5 +57,5 @@
 
 ---
 ### Useful Credential
-- `john.doe@mail.com` as email witih `password` as password for Senior HRD role
-- `lee.doe@mail.com` as email witih `password` as password for HRD role
+- `john.doe@mail.com` as email/username witih `password` as password for Senior HRD role
+- `lee.doe@mail.com` as email/username witih `password` as password for HRD role
