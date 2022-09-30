@@ -30,11 +30,11 @@ class CandidateController extends Controller
      * @OA\Response(
      * response=200,
      * description="Successfull response",
-     * @OA\JsonContent()
+     * @OA\JsonContent(ref="#/components/schemas/ListResponseSchema"),
      * ),
      * @OA\Response(
      * response=401,
-     * @OA\JsonContent(),
+     * @OA\JsonContent(ref="#/components/schemas/ErrorSchema"),
      * description="Unauthenticated, please make sure bearer token are provided"
      * )
      * )
@@ -52,27 +52,31 @@ class CandidateController extends Controller
      * security={
      * {"passport"={}}
      * },
+     *  @OA\RequestBody(
+     *  required=true,
+     *  @OA\JsonContent(ref="#/components/schemas/UpsertCandidateSchema")
+     *  ),
      * operationId="createCandidates",
      * tags={"Candidates"},
      * summary="Create new candidate",
      * @OA\Response(
      * response=201,
      * description="Successfull response",
-     * @OA\JsonContent()
+     * @OA\JsonContent(ref="#/components/schemas/CandidateSchema")
      * ),
      * @OA\Response(
      * response=400,
-     * @OA\JsonContent(),
+     * @OA\JsonContent(ref="#/components/schemas/ErrorSchema"),
      * description="Client error, please check response to see more detail and make sure your payload is in accordance with validation rules"
      * ),
      * @OA\Response(
      * response=401,
-     * @OA\JsonContent(),
+     * @OA\JsonContent(ref="#/components/schemas/ErrorSchema"),
      * description="Unauthenticated, please make sure bearer token are provided"
      * ),
      * @OA\Response(
      * response=403,
-     * @OA\JsonContent(),
+     * @OA\JsonContent(ref="#/components/schemas/ErrorSchema"),
      * description="The user does not have privilege to perform this action"
      * )
      * )
@@ -120,12 +124,12 @@ class CandidateController extends Controller
      * ),
      * @OA\Response(
      * response=200,
-     * @OA\JsonContent(),
+     * @OA\JsonContent(ref="#/components/schemas/CandidateSchema"),
      * description="Successfull response"
      * ),
      * @OA\Response(
      * response=401,
-     * @OA\JsonContent(),
+     * @OA\JsonContent(ref="#/components/schemas/ErrorSchema"),
      * description="Unauthenticated, please make sure bearer token are provided"
      * )
      * )
@@ -151,32 +155,36 @@ class CandidateController extends Controller
      * description="Candidate Id",
      * in="path"
      * ),
+     *  @OA\RequestBody(
+     *  required=true,
+     *  @OA\JsonContent(ref="#/components/schemas/UpsertCandidateSchema")
+     *  ),
      * security={
      * {"passport"={}}
      * },
      * @OA\Response(
      * response=200,
-     * @OA\JsonContent(),
+     * @OA\JsonContent(ref="#/components/schemas/CandidateSchema"),
      * description="Successfull response"
      * ),
      * @OA\Response(
      * response=400,
-     * @OA\JsonContent(),
+     * @OA\JsonContent(ref="#/components/schemas/ErrorSchema"),
      * description="Client error, please check response to see more detail and make sure your payload is in accordance with validation rules"
      * ),
      * @OA\Response(
      * response=401,
-     * @OA\JsonContent(),
+     * @OA\JsonContent(ref="#/components/schemas/ErrorSchema"),
      * description="Unauthenticated, please make sure bearer token are provided"
      * ),
      * @OA\Response(
      * response=403,
-     * @OA\JsonContent(),
+     * @OA\JsonContent(ref="#/components/schemas/ErrorSchema"),
      * description="The user does not have privilege to perform this action"
      * ),
      * * @OA\Response(
      * response=404,
-     * @OA\JsonContent(),
+     * @OA\JsonContent(ref="#/components/schemas/ErrorSchema"),
      * description="The candidate you want to edit does not exists"
      * )
      * )

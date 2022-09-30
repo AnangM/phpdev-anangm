@@ -28,7 +28,9 @@
                         "description": "Successfull response",
                         "content": {
                             "application/json": {
-                                "schema": {}
+                                "schema": {
+                                    "$ref": "#/components/schemas/ListResponseSchema"
+                                }
                             }
                         }
                     },
@@ -36,7 +38,9 @@
                         "description": "Unauthenticated, please make sure bearer token are provided",
                         "content": {
                             "application/json": {
-                                "schema": {}
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorSchema"
+                                }
                             }
                         }
                     }
@@ -53,12 +57,24 @@
                 ],
                 "summary": "Create new candidate",
                 "operationId": "createCandidates",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpsertCandidateSchema"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "201": {
                         "description": "Successfull response",
                         "content": {
                             "application/json": {
-                                "schema": {}
+                                "schema": {
+                                    "$ref": "#/components/schemas/CandidateSchema"
+                                }
                             }
                         }
                     },
@@ -66,7 +82,9 @@
                         "description": "Client error, please check response to see more detail and make sure your payload is in accordance with validation rules",
                         "content": {
                             "application/json": {
-                                "schema": {}
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorSchema"
+                                }
                             }
                         }
                     },
@@ -74,7 +92,9 @@
                         "description": "Unauthenticated, please make sure bearer token are provided",
                         "content": {
                             "application/json": {
-                                "schema": {}
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorSchema"
+                                }
                             }
                         }
                     },
@@ -82,7 +102,9 @@
                         "description": "The user does not have privilege to perform this action",
                         "content": {
                             "application/json": {
-                                "schema": {}
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorSchema"
+                                }
                             }
                         }
                     }
@@ -113,7 +135,9 @@
                         "description": "Successfull response",
                         "content": {
                             "application/json": {
-                                "schema": {}
+                                "schema": {
+                                    "$ref": "#/components/schemas/CandidateSchema"
+                                }
                             }
                         }
                     },
@@ -121,7 +145,9 @@
                         "description": "Unauthenticated, please make sure bearer token are provided",
                         "content": {
                             "application/json": {
-                                "schema": {}
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorSchema"
+                                }
                             }
                         }
                     }
@@ -145,12 +171,24 @@
                         "description": "Candidate Id"
                     }
                 ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpsertCandidateSchema"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Successfull response",
                         "content": {
                             "application/json": {
-                                "schema": {}
+                                "schema": {
+                                    "$ref": "#/components/schemas/CandidateSchema"
+                                }
                             }
                         }
                     },
@@ -158,7 +196,9 @@
                         "description": "Client error, please check response to see more detail and make sure your payload is in accordance with validation rules",
                         "content": {
                             "application/json": {
-                                "schema": {}
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorSchema"
+                                }
                             }
                         }
                     },
@@ -166,7 +206,9 @@
                         "description": "Unauthenticated, please make sure bearer token are provided",
                         "content": {
                             "application/json": {
-                                "schema": {}
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorSchema"
+                                }
                             }
                         }
                     },
@@ -174,7 +216,9 @@
                         "description": "The user does not have privilege to perform this action",
                         "content": {
                             "application/json": {
-                                "schema": {}
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorSchema"
+                                }
                             }
                         }
                     },
@@ -182,7 +226,9 @@
                         "description": "The candidate you want to edit does not exists",
                         "content": {
                             "application/json": {
-                                "schema": {}
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorSchema"
+                                }
                             }
                         }
                     }
@@ -192,6 +238,323 @@
                         "passport": []
                     }
                 ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CandidateSchema": {
+                "title": "Candidate",
+                "description": "Candidate Response",
+                "required": [
+                    "name",
+                    "education",
+                    "birthday",
+                    "experience",
+                    "last_position",
+                    "applied_position",
+                    "top_skills",
+                    "resume_url",
+                    "email",
+                    "phone"
+                ],
+                "properties": {
+                    "id": {
+                        "title": "Id",
+                        "description": "Candidate Id",
+                        "type": "string",
+                        "example": "761cf4bf-24be-40b4-ac1a-92de8a75e055"
+                    },
+                    "name": {
+                        "title": "Name",
+                        "description": "Name of the candidate",
+                        "type": "string",
+                        "example": "John Doe"
+                    },
+                    "education": {
+                        "title": "Education",
+                        "description": "Candidate education",
+                        "type": "string",
+                        "example": "Universitas Gadjah Mada"
+                    },
+                    "birthday": {
+                        "title": "Birthday",
+                        "description": "Candidate birthday in YYYY-MM-DD",
+                        "type": "string",
+                        "example": "1995-05-23"
+                    },
+                    "experience": {
+                        "title": "Experience",
+                        "description": "Candidate experience",
+                        "type": "string",
+                        "example": "5 years"
+                    },
+                    "last_position": {
+                        "title": "Last Position",
+                        "description": "Candidate last position",
+                        "type": "string",
+                        "example": "Java Developer"
+                    },
+                    "applied_position": {
+                        "title": "Applied Position",
+                        "description": "Candidate applied position",
+                        "type": "string",
+                        "example": "Senior Java Developer"
+                    },
+                    "top_skills": {
+                        "title": "Top Skills",
+                        "description": "Candidate top 5 skills in array",
+                        "type": "array",
+                        "items": {
+                            "example": "json"
+                        },
+                        "example": "['json', 'rest', 'php', 'git', 'java']"
+                    },
+                    "resume_url": {
+                        "title": "Resume URL",
+                        "description": "Candidate resume url",
+                        "type": "string",
+                        "example": "http://localhost/storage/resume.pdf"
+                    },
+                    "email": {
+                        "title": "E-Mail",
+                        "description": "Candidate email",
+                        "type": "string",
+                        "example": "candidate@email.com"
+                    },
+                    "phone": {
+                        "title": "Phone",
+                        "description": "Candidate phone number",
+                        "type": "string",
+                        "example": "08123123123"
+                    }
+                },
+                "type": "object"
+            },
+            "ErrorSchema": {
+                "title": "Error",
+                "description": "Error",
+                "properties": {
+                    "message": {
+                        "title": "Message",
+                        "description": "Error Message",
+                        "type": "string",
+                        "example": "An error has ocured"
+                    }
+                },
+                "type": "object"
+            },
+            "ListResponseSchema": {
+                "title": "List Candidate",
+                "description": "List Candidate Response",
+                "properties": {
+                    "current_page": {
+                        "title": "Current Page",
+                        "description": "Current retrieved page",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "data": {
+                        "title": "Data",
+                        "description": "Array of datas to be displayed",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CandidateSchema"
+                        }
+                    },
+                    "first_page_url": {
+                        "title": "First page url",
+                        "description": "URL to retrieve first page",
+                        "type": "string",
+                        "example": "http://localhost/list?page=1"
+                    },
+                    "from": {
+                        "title": "From",
+                        "description": "Int index of the displayed data is from",
+                        "type": "integer",
+                        "example": 21
+                    },
+                    "last_page": {
+                        "title": "Last Page",
+                        "description": "Last page number",
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "last_page_url": {
+                        "title": "Last page url",
+                        "description": "URL to retrieve last page",
+                        "type": "string",
+                        "example": "http://localhost/list?page=10"
+                    },
+                    "links": {
+                        "title": "Links",
+                        "description": "Array of pagiantion links",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/PaginationLinksSchema"
+                        }
+                    },
+                    "next_page_url": {
+                        "title": "Next page url",
+                        "description": "URL to retrieve next page",
+                        "type": "string",
+                        "example": "http://localhost/list?page=2"
+                    },
+                    "path": {
+                        "title": "Path",
+                        "description": "Base path for this request",
+                        "type": "string",
+                        "example": "http://localhost/list"
+                    },
+                    "per_page": {
+                        "title": "Per page",
+                        "description": "Number of item displayed per page",
+                        "type": "integer",
+                        "example": 20
+                    },
+                    "prev_page_url": {
+                        "title": "Prev page url",
+                        "description": "URL to retrieve previous page",
+                        "type": "string",
+                        "example": "http://localhost/list?page=1"
+                    },
+                    "to": {
+                        "title": "To",
+                        "description": "Int index of the displayed data is to",
+                        "type": "integer",
+                        "example": 40
+                    },
+                    "total": {
+                        "title": "Total",
+                        "description": "Total number of item",
+                        "type": "integer",
+                        "example": 400
+                    }
+                },
+                "type": "object"
+            },
+            "PaginationLinksSchema": {
+                "title": "Pagination Link",
+                "description": "Item on pagination links",
+                "properties": {
+                    "url": {
+                        "title": "Url",
+                        "description": "link url",
+                        "type": "string",
+                        "example": "http://localhost/list?page=1"
+                    },
+                    "label": {
+                        "title": "Label",
+                        "description": "Label used on the link",
+                        "type": "string",
+                        "example": "&raquo; next"
+                    },
+                    "active": {
+                        "title": "Active",
+                        "description": "Flag to check wether if links is active",
+                        "type": "boolean",
+                        "example": false
+                    }
+                },
+                "type": "object"
+            },
+            "UpsertCandidateSchema": {
+                "title": "Update / Create Candidate",
+                "description": "Create / Update Candidate Request",
+                "required": [
+                    "name",
+                    "education",
+                    "birthday",
+                    "experience",
+                    "last_position",
+                    "applied_position",
+                    "top_skills",
+                    "resume_url",
+                    "email",
+                    "phone"
+                ],
+                "properties": {
+                    "name": {
+                        "title": "Name",
+                        "description": "Name of the candidate",
+                        "type": "string",
+                        "example": "John Doe"
+                    },
+                    "education": {
+                        "title": "Education",
+                        "description": "Candidate education",
+                        "type": "string",
+                        "example": "Universitas Gadjah Mada"
+                    },
+                    "birthday": {
+                        "title": "Birthday",
+                        "description": "Candidate birthday in YYYY-MM-DD",
+                        "type": "string",
+                        "example": "1995-05-23"
+                    },
+                    "experience": {
+                        "title": "Experience",
+                        "description": "Candidate experience",
+                        "type": "string",
+                        "example": "5 years"
+                    },
+                    "last_position": {
+                        "title": "Last Position",
+                        "description": "Candidate last position",
+                        "type": "string",
+                        "example": "Java Developer"
+                    },
+                    "applied_position": {
+                        "title": "Applied Position",
+                        "description": "Candidate applied position",
+                        "type": "string",
+                        "example": "Senior Java Developer"
+                    },
+                    "top_skills": {
+                        "title": "Top Skills",
+                        "description": "Candidate top 5 skills in array",
+                        "type": "array",
+                        "items": {
+                            "example": "json"
+                        },
+                        "example": "['json', 'rest', 'php', 'git', 'java']"
+                    },
+                    "resume_url": {
+                        "title": "Resume URL",
+                        "description": "Candidate resume url",
+                        "type": "string",
+                        "example": "http://localhost/storage/resume.pdf"
+                    },
+                    "email": {
+                        "title": "E-Mail",
+                        "description": "Candidate email",
+                        "type": "string",
+                        "example": "candidate@email.com"
+                    },
+                    "phone": {
+                        "title": "Phone",
+                        "description": "Candidate phone number",
+                        "type": "string",
+                        "example": "08123123123"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "passport": {
+                "type": "oauth2",
+                "description": "Laravel passport oauth2 security.",
+                "in": "header",
+                "scheme": "https",
+                "flows": {
+                    "password": {
+                        "authorizationUrl": "http://localhost:8000/oauth/authorize",
+                        "tokenUrl": "http://localhost:8000/oauth/token",
+                        "refreshUrl": "http://localhost:8000/token/refresh",
+                        "scopes": []
+                    }
+                }
             }
         }
     }
