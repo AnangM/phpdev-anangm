@@ -80,9 +80,7 @@ class UpsertCandidateSchema{
      * @OA\Property(
      *      title="Top Skills",
      *      description="Candidate top 5 skills in array",
-     *      example="['json', 'rest', 'php', 'git', 'java']",
      *      @OA\Items(
-     *        example="json"
      *      )
      * )
      *

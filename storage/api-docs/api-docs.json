@@ -514,10 +514,7 @@
                         "title": "Top Skills",
                         "description": "Candidate top 5 skills in array",
                         "type": "array",
-                        "items": {
-                            "example": "json"
-                        },
-                        "example": "['json', 'rest', 'php', 'git', 'java']"
+                        "items": {}
                     },
                     "resume": {
                         "title": "Resume File",
