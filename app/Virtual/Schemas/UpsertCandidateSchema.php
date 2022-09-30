@@ -93,14 +93,14 @@ class UpsertCandidateSchema{
 
     /**
      * @OA\Property(
-     *      title="Resume URL",
-     *      description="Candidate resume url",
-     *      example="http://localhost/storage/resume.pdf"
+     *      title="Resume File",
+     *      description="A PDF file encoded with base 64 and the data:mime/type should be included",
+     *      example="data:application/pdf;base64,JVBERi0xLjMKJcTl8uXrp/Og0MTGCjMgMCBvYmoKPDwgL0ZpbHRlciAvRmxhdGVEZWNvZGUgL0xlbmd0aCAxMTkgPj4Kc3RyZWFtCngBK1QIVChU0HcuNlRILlYwAMPiZKCQgZ6RCYQPYhhaKJhaGOtZGikk5yo4hQBlDQwMjBVCkhVMIXqAlJGRqYKpoSVXSK6CfkiIkYKhQkiagoaikrKipkJIloJrCNgq/OYiTDM2MtQzNLQwwmKkCsK8QABJcSgnCmVuZHN0cmVhbQplbmRvYmoKMSAwIG9iago8PCAvVHlwZSAvUGFnZSAvUGFyZW50IDIgMCBSIC9SZXNvdXJjZXMgNCAwIFIgL0NvbnRlbnRzIDMgMCBSIC9NZWRpYUJveCBbMCAwIDYxMiA3OTJdCj4+CmVuZG9iago0IDAgb2JqCjw8IC9Qcm9jU2V0IFsgL1BERiAvVGV4dCBdIC9Db2xvclNwYWNlIDw8IC9DczEgNSAwIFIgPj4gL0ZvbnQgPDwgL1RUMiA3IDAgUgo+PiA"
      * )
      *
      * @var string
      */
-    private $resume_url;
+    private $resume;
 
     /**
      * @OA\Property(
