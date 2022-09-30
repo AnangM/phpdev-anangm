@@ -32,7 +32,7 @@ class CandidateSeeder extends Seeder
                 "java"
             ]),
             "email" => $faker->email(),
-            "phone" => $faker->phoneNumber(),
+            "phone" => "081231231231",
             "resume_url"=>$faker->url()
         ];
 
