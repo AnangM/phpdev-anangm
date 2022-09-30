@@ -59,3 +59,5 @@ client secret : fill with client secret generated from step 8 on How to run this
 ### Useful Credential
 - `john.doe@mail.com` as email/username witih `password` as password for Senior HRD role
 - `lee.doe@mail.com` as email/username witih `password` as password for HRD role
+- `client id` 9763f4c2-7aa1-499b-91a7-c31dedb256cb (only if using included .sql, if using migration this value may be different)
+- `client secret` hp03sD5aPoXfgVnydXZgtbep9dtG1VuLMENKi5ue (only if using included .sql, if using migration this value may be different)
