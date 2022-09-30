@@ -105,8 +105,8 @@ class CandidateSchema{
     /**
      * @OA\Property(
      *      title="Resume URL",
-     *      description="Candidate resume url",
-     *      example="http://localhost/storage/resume.pdf"
+     *      description="Candidate resume url. Can be accessed by {base_url}/{resume_url}",
+     *      example="path/to/resume.pdf"
      * )
      *
      * @var string
